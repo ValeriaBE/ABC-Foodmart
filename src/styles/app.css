@@ -1,0 +1,149 @@
+body{
+
+    margin:0;
+
+    background:#eef2f7;
+
+    font-family:
+    Inter,
+    Arial,
+    sans-serif;
+
+}
+
+.connection-page{
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    min-height:100vh;
+
+}
+
+.connection-card{
+
+    width:700px;
+
+    background:white;
+
+    border-radius:18px;
+
+    padding:40px;
+
+    box-shadow:
+        0 15px 40px rgba(0,0,0,.08);
+
+}
+
+.status{
+
+    display:flex;
+
+    gap:8px;
+
+    align-items:center;
+
+    color:green;
+
+    margin:20px 0;
+
+}
+
+.info{
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(3,1fr);
+
+    margin:30px 0;
+
+}
+
+.info div{
+
+    display:flex;
+
+    flex-direction:column;
+
+}
+
+ul{
+
+    max-height:220px;
+
+    overflow:auto;
+
+    background:#f7f8fb;
+
+    padding:20px;
+
+    border-radius:10px;
+
+}
+
+button{
+
+    width:100%;
+
+    margin-top:30px;
+
+    padding:16px;
+
+    border:none;
+
+    border-radius:10px;
+
+    background:#2563eb;
+
+    color:white;
+
+    font-size:16px;
+
+    cursor:pointer;
+
+}
+.loading{
+
+    margin-top:40px;
+
+    padding:30px;
+
+    background:#eef5ff;
+
+    border-radius:12px;
+
+    text-align:center;
+
+}
+
+.spinner{
+
+    width:40px;
+
+    height:40px;
+
+    border-radius:50%;
+
+    border:5px solid #ddd;
+
+    border-top:5px solid #2563eb;
+
+    margin:auto;
+
+    animation:spin 1s linear infinite;
+
+}
+
+@keyframes spin{
+
+    to{
+
+        transform:rotate(360deg);
+
+    }
+
+}
