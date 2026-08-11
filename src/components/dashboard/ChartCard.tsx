@@ -1,37 +1,35 @@
-type Props={
+import type { ReactNode } from "react";
 
-    title:string;
-
-    className?:string;
-
-    children:React.ReactNode;
-
+interface Props {
+  title: string;
+  subtitle?: string;
+  children: ReactNode;
 }
 
 export default function ChartCard({
+  title,
+  subtitle,
+  children,
+}: Props) {
+  return (
+    <section className="chart-card">
 
-    title,
+      <div className="chart-card-header">
 
-    className="",
+        <h2>{title}</h2>
 
-    children
+        {subtitle && (
+          <p>{subtitle}</p>
+        )}
 
-}:Props){
+      </div>
 
-    return(
+      <div className="chart-card-body">
 
-        <div className={`chart-card ${className}`}>
+        {children}
 
-            <h3>
+      </div>
 
-                {title}
-
-            </h3>
-
-            {children}
-
-        </div>
-
-    );
-
+    </section>
+  );
 }
