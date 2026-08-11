@@ -1,6 +1,5 @@
 import Sidebar from "../components/layout/Sidebar";
 import Header from "../components/layout/Header";
-
 import MetricCard from "../components/dashboard/MetricCard";
 import ChartCard from "../components/dashboard/ChartCard";
 
@@ -8,6 +7,18 @@ import { useDashboard } from "../context/DashboardContext";
 
 import "../styles/dashboard.css";
 import RevenueChart from "../components/charts/RevenueChart";
+import MonthlySalesChart from "../components/charts/MonthlySalesChart";
+import CategorySalesChart from "../components/charts/CategorySalesChart";
+import TopProductsTable from "../components/tables/TopProductsTable";
+import LowStockTable from "../components/tables/LowStockTable";
+import VendorPerformanceTable from "../components/tables/VendorPerformanceTables";
+
+import {
+    DollarSign,
+    ShoppingCart,
+    Users,
+    Package,
+} from "lucide-react";
 
 export default function DashboardPage() {
 
@@ -17,7 +28,8 @@ export default function DashboardPage() {
         return <h2>Loading...</h2>;
 
     const kpis = dashboardData.kpis;
-console.log(dashboardData.revenue);
+
+
     return (
 
         <div className="dashboard-layout">
@@ -32,62 +44,114 @@ console.log(dashboardData.revenue);
 
                     <MetricCard
                         title="Revenue"
-                        value={`$${Number(kpis.total_revenue).toLocaleString()}`}
+                        value={`$${Number(
+                            kpis.total_revenue
+                        ).toLocaleString(undefined, {
+                            maximumFractionDigits: 0,
+                        })}`}
+                        subtitle="Across all stores"
+                        icon={<DollarSign size={20} />}
                     />
 
                     <MetricCard
-                        title="Sales"
-                        value={kpis.total_sales}
+                        title="Transactions"
+                        value={Number(
+                            kpis.total_sales
+                        ).toLocaleString()}
+                        subtitle="Completed sales"
+                        icon={<ShoppingCart size={20} />}
                     />
 
                     <MetricCard
                         title="Customers"
-                        value={kpis.active_customers}
+                        value={Number(
+                            kpis.active_customers
+                        ).toLocaleString()}
+                        subtitle="Active loyalty customers"
+                        icon={<Users size={20} />}
                     />
 
                     <MetricCard
                         title="Low Stock"
-                        value={kpis.low_stock_products}
+                        value={Number(
+                            kpis.low_stock_products
+                        ).toLocaleString()}
+                        subtitle="Items needing attention"
+                        icon={<Package size={20} />}
+                        variant="warning"
                     />
 
                 </section>
 
                 <section className="dashboard-grid">
 
-                    <ChartCard title="Revenue by Store">
+                    <ChartCard
+                        title="Revenue by Store"
+                        subtitle="Sales revenue across all locations"
+                    >
 
-                       <RevenueChart
+                        <RevenueChart
 
-    data={dashboardData.revenue}
+                            data={dashboardData.revenue}
 
-/>
-
-                    </ChartCard>
-
-                    <ChartCard title="Monthly Sales">
-
-                        Monthly Chart
-
-                    </ChartCard>
-
-                    <ChartCard title="Category Sales">
-
-                        Category Chart
-
-                    </ChartCard>
-
-                    <ChartCard title="Top Products">
-
-                        Top Products
+                        />
 
                     </ChartCard>
 
                     <ChartCard
-                        className="wide"
-                        title="Inventory Alerts"
+                        title="Monthly Sales"
+                        subtitle="Monthly revenue trend"
+                    >
+                        <MonthlySalesChart
+                            data={dashboardData.monthlySales}
+                        />
+                    </ChartCard>
+
+                    <ChartCard
+                        title="Sales by Category"
+                        subtitle="Revenue by product category"
                     >
 
-                        Inventory Table
+                        <CategorySalesChart
+                            data={dashboardData.categorySales}
+                        />
+
+                    </ChartCard>
+
+                    <ChartCard
+                        title="Top Products"
+                        subtitle="Best-selling products"
+                    >
+
+                        <TopProductsTable
+                            data={dashboardData.topProducts}
+                        />
+
+                    </ChartCard>
+
+                    <ChartCard
+                        title="Vendor Performance"
+                        subtitle="Average delivery performance"
+                    >
+
+                        <VendorPerformanceTable
+
+                            data={dashboardData.vendorPerformance}
+
+                        />
+
+                    </ChartCard>
+
+                    <ChartCard
+                        title="Inventory Alerts"
+                        subtitle="Products below reorder level"
+                    >
+
+                        <LowStockTable
+
+                            data={dashboardData.lowStock}
+
+                        />
 
                     </ChartCard>
 
