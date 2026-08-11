@@ -1,6 +1,12 @@
-export default function Header(){
+import { Database } from "lucide-react";
 
-    return(
+import "./Header.css";
+
+export default function Header() {
+
+    const today = new Date();
+
+    return (
 
         <header className="dashboard-header">
 
@@ -8,23 +14,41 @@ export default function Header(){
 
                 <h1>
 
-                    Business Overview
+                    ABC Foodmart Executive Dashboard
 
                 </h1>
 
                 <p>
 
-                    Connected to PostgreSQL
+                    Business performance across Queens & Brooklyn locations
 
                 </p>
 
             </div>
 
-            <button>
+            <div className="header-status">
 
-                Refresh
+                <div className="status-row">
 
-            </button>
+                    <span className="status-dot"></span>
+
+                    <Database size={18} />
+
+                    Connected
+
+                </div>
+
+                <span className="last-updated">
+
+                    Last Updated
+
+                    {" "}
+
+                    {today.toLocaleDateString()}
+
+                </span>
+
+            </div>
 
         </header>
 

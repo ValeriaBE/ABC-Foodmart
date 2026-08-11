@@ -1,69 +1,54 @@
 import {
-    LayoutDashboard,
-    Package,
-    ShoppingCart,
-    Truck,
-    Users
+  LayoutDashboard,
+  Database,
+  Settings,
+  Server,
+  BarChart3,
 } from "lucide-react";
+import { NavLink } from "react-router-dom";
 
 export default function Sidebar() {
+  return (
+    <aside className="sidebar">
+      <div>
+        <div className="sidebar-logo">ABC</div>
 
-    return (
+        <h2>Foodmart</h2>
 
-        <aside className="sidebar">
+        <nav>
 
-            <h2>
+          <NavLink
+            to="/dashboard"
+            className={({ isActive }) =>
+              isActive ? "nav-link active" : "nav-link"
+            }
+          >
+            <LayoutDashboard size={18} />
+            Dashboard
+          </NavLink>
 
-                ABC Foodmart
+          <NavLink
+            to="/database"
+            className={({ isActive }) =>
+              isActive ? "nav-link active" : "nav-link"
+            }
+          >
+            <Database size={18} />
+            Database
+          </NavLink>
 
-            </h2>
+          <NavLink
+            to="/settings"
+            className={({ isActive }) =>
+              isActive ? "nav-link active" : "nav-link"
+            }
+          >
+            <Settings size={18} />
+            Settings
+          </NavLink>
 
-            <nav>
-
-                <a>
-
-                    <LayoutDashboard size={18} />
-
-                    Dashboard
-
-                </a>
-
-                <a>
-
-                    <Package size={18} />
-
-                    Inventory
-
-                </a>
-
-                <a>
-
-                    <ShoppingCart size={18} />
-
-                    Sales
-
-                </a>
-
-                <a>
-
-                    <Truck size={18} />
-
-                    Vendors
-
-                </a>
-
-                <a>
-
-                    <Users size={18} />
-
-                    Customers
-
-                </a>
-
-            </nav>
-
-        </aside>
-
-    );
-
+        </nav>
+      </div>
+    </aside>
+  );
 }
