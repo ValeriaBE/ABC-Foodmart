@@ -1,9 +1,10 @@
-import { Database } from "lucide-react";
+import { Database, RefreshCw } from "lucide-react";
+import { useDashboard } from "../../context/DashboardContext";
 
 import "./Header.css";
 
 export default function Header() {
-
+    const { refreshDashboard } = useDashboard();
     const today = new Date();
 
     return (
@@ -28,27 +29,37 @@ export default function Header() {
 
             <div className="header-status">
 
-                <div className="status-row">
+    <button
+        className="refresh-button"
+        onClick={() => refreshDashboard()}
+    >
 
-                    <span className="status-dot"></span>
+        <RefreshCw size={16} />
 
-                    <Database size={18} />
+        Refresh Dashboard
 
-                    Connected
+    </button>
 
-                </div>
+    <div className="status-row">
 
-                <span className="last-updated">
+        <span className="status-dot"></span>
 
-                    Last Updated
+        <Database size={18} />
 
-                    {" "}
+        Connected
 
-                    {today.toLocaleDateString()}
+    </div>
 
-                </span>
+    <span className="last-updated">
 
-            </div>
+        Last Updated
+
+        {" "}
+
+        {today.toLocaleDateString()}
+
+    </span>
+</div>
 
         </header>
 
