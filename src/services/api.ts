@@ -17,28 +17,54 @@ import type { CategorySales } from "../types/categorySale";
 import type { Store } from "../types/store";
 import type { VendorPerformance } from "../types/vendorPerformance";
 import type { DatabaseStatus } from "../types/databaseStatus";
+import type { TopProduct } from "../types/topProducts";
+import type { LowStockItem } from "../types/lowStock";
+
+const storeQuery = (storeId?: number | null) =>
+  storeId ? `?store_id=${storeId}` : "";
 
 export const api = {
-  connection: () => get<Connection>("/connection"),
 
-  kpis: () => get<any>("/kpis"),
+  connection: () =>
+    get<Connection>("/connection"),
 
-revenue: () =>
-    get<RevenueByStore[]>("/revenue-by-store"),
+  kpis: (storeId?: number | null) =>
+    get<any>(`/kpis${storeQuery(storeId)}`),
 
-  monthlySales: () =>
-    get<MonthlySales[]>("/monthly-sales"),
+  revenue: (storeId?: number | null) =>
+    get<RevenueByStore[]>(
+      `/revenue-by-store${storeQuery(storeId)}`
+    ),
 
-  categorySales: () => get<CategorySales[]>("/category-sales"),
+  monthlySales: (storeId?: number | null) =>
+    get<MonthlySales[]>(
+      `/monthly-sales${storeQuery(storeId)}`
+    ),
 
-  topProducts: () => get<any[]>("/top-products"),
+  categorySales: (storeId?: number | null) =>
+    get<CategorySales[]>(
+      `/category-sales${storeQuery(storeId)}`
+    ),
 
-  lowStock: () => get<any[]>("/low-stock"),
+  topProducts: (storeId?: number | null) =>
+    get<TopProduct[]>(
+      `/top-products${storeQuery(storeId)}`
+    ),
 
-  vendorPerformance: () =>
-    get<VendorPerformance[]>("/vendor-performance"),
+  lowStock: (storeId?: number | null) =>
+    get<LowStockItem[]>(
+      `/low-stock${storeQuery(storeId)}`
+    ),
+
+  vendorPerformance: (storeId?: number | null) =>
+    get<VendorPerformance[]>(
+      `/vendor-performance${storeQuery(storeId)}`
+    ),
+
   stores: () =>
     get<Store[]>("/stores"),
-  databaseStatus:()=>
+
+  databaseStatus: () =>
     get<DatabaseStatus>("/database-status"),
+
 };

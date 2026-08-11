@@ -19,15 +19,21 @@ import {
     Users,
     Package,
 } from "lucide-react";
+import StoreSelect from "../components/StoreSelect";
 
 export default function DashboardPage() {
 
-    const { dashboardData } = useDashboard();
-
+    const {
+        dashboardData,
+        stores,
+        selectedStore,
+        setSelectedStore,
+    } = useDashboard();
     if (!dashboardData)
         return <h2>Loading...</h2>;
 
     const kpis = dashboardData.kpis;
+
 
 
     return (
@@ -39,7 +45,15 @@ export default function DashboardPage() {
             <main className="dashboard-main">
 
                 <Header />
+<div className="dashboard-toolbar">
 
+  <StoreSelect
+    stores={stores}
+    value={selectedStore}
+    onChange={setSelectedStore}
+  />
+
+</div>
                 <section className="metrics">
 
                     <MetricCard

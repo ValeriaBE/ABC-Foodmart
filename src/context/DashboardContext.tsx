@@ -1,41 +1,126 @@
 import {
-    createContext,
-    useContext,
-    useState,
+  createContext,
+  useContext,
+  useState,
+  useEffect,
 } from "react";
 
+import { api } from "../services/api";
+
 const DashboardContext =
-    createContext<any>(null);
+  createContext<any>(null);
 
 export function DashboardProvider({
-    children,
+  children,
 }: any) {
 
-    const [dashboardData,
-        setDashboardData] =
-        useState(null);
+  const [dashboardData, setDashboardData] =
+    useState<any>(null);
 
-    return (
+  const [selectedStore, setSelectedStore] =
+    useState<number | null>(null);
 
-        <DashboardContext.Provider
-            value={{
-                dashboardData,
-                setDashboardData,
-            }}
-        >
+  const [stores, setStores] =
+    useState<any[]>([]);
 
-            {children}
+  async function loadDashboard(
+    storeId: number | null = selectedStore
+  ) {
 
-        </DashboardContext.Provider>
+    const [
+      kpis,
+      revenue,
+      monthlySales,
+      categorySales,
+      topProducts,
+      lowStock,
+      vendorPerformance,
+    ] = await Promise.all([
 
-    );
+      api.kpis(storeId),
+
+      api.revenue(storeId),
+
+      api.monthlySales(storeId),
+
+      api.categorySales(storeId),
+
+      api.topProducts(storeId),
+
+      api.lowStock(storeId),
+
+      api.vendorPerformance(storeId),
+
+    ]);
+
+    setDashboardData({
+
+      kpis,
+
+      revenue,
+
+      monthlySales,
+
+      categorySales,
+
+      topProducts,
+
+      lowStock,
+
+      vendorPerformance,
+
+    });
+
+  }
+
+  useEffect(() => {
+
+    api.stores()
+
+      .then(setStores)
+
+      .catch(console.error);
+
+  }, []);
+
+  useEffect(() => {
+
+    loadDashboard();
+
+  }, [selectedStore]);
+
+  return (
+
+    <DashboardContext.Provider
+
+      value={{
+
+        dashboardData,
+
+        selectedStore,
+
+        setSelectedStore,
+
+        stores,
+
+        refreshDashboard: loadDashboard,
+
+      }}
+
+    >
+
+      {children}
+
+    </DashboardContext.Provider>
+
+  );
 
 }
 
-export function useDashboard(){
+export function useDashboard() {
 
-    return useContext(
-        DashboardContext
-    );
+  return useContext(
+    DashboardContext
+  );
 
 }
