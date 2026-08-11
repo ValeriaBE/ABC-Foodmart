@@ -7,6 +7,7 @@ import ChartCard from "../components/dashboard/ChartCard";
 import { useDashboard } from "../context/DashboardContext";
 
 import "../styles/dashboard.css";
+import RevenueChart from "../components/charts/RevenueChart";
 
 export default function DashboardPage() {
 
@@ -16,7 +17,7 @@ export default function DashboardPage() {
         return <h2>Loading...</h2>;
 
     const kpis = dashboardData.kpis;
-
+console.log(dashboardData.revenue);
     return (
 
         <div className="dashboard-layout">
@@ -55,7 +56,11 @@ export default function DashboardPage() {
 
                     <ChartCard title="Revenue by Store">
 
-                        Revenue Chart
+                       <RevenueChart
+
+    data={dashboardData.revenue}
+
+/>
 
                     </ChartCard>
 

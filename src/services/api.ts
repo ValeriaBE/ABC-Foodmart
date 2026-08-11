@@ -11,13 +11,14 @@ async function get<T>(url: string): Promise<T> {
 }
 
 import type { Connection } from "../types/connection";
-
+import type { RevenueByStore } from "../types/dashboard";
 export const api = {
   connection: () => get<Connection>("/connection"),
 
   kpis: () => get<any>("/kpis"),
 
-  revenue: () => get<any[]>("/revenue-by-store"),
+revenue: () =>
+    get<RevenueByStore[]>("/revenue-by-store"),
 
   monthlySales: () => get<any[]>("/monthly-sales"),
 
