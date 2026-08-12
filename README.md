@@ -153,6 +153,16 @@ Database:
 
 ---
 
-## Authors
+## Screenshots
 
-ABC Foodmart Database Systems Team
+### Dashboard
+
+![Dashboard](screenshots/dashboard.png)
+
+### Filters
+
+![Filters](screenshots/filters.png)
+
+### Database Status
+
+![Database](screenshots/database-status.png)
